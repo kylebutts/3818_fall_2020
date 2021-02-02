@@ -1,0 +1,207 @@
+---
+title: "t-test, Size, Power, Two-mean t-test"
+author: "Kyle F. Butts"
+date: "10/28/2020"
+output: html_document
+---
+
+# Size and Power
+
+## Size
+
+Let's see how often we reject the null when the null is the true population mean (i.e. size of our test). We will use the level of confidence $\alpha = 0.05$.
+
+$$ H_0: \mu = 10$$ 
+$$ H_A: \mu \neq 10 $$
+
+
+
+```{r title="Size"}
+n_sims <- 10000
+
+# Can use normal z-score
+n <- 50
+alpha <- 0.10
+
+sample_means <- c()
+sample_rejects <- c()
+
+for(i in 1:n_sims){
+	
+	draws <- rnorm(n, mean = 10, sd = 4)
+	mean <- mean(draws)
+
+	# Standardize Mean
+	z_score <- (mean - 10)/(4/sqrt(n))
+	
+	# p-value = 2 * P(z <= - |z-score|)
+	z_score <- -abs(z_score)
+	p_value <- 2 * pnorm(z_score)
+	
+	# reject if p_value < alpha
+	reject <- p_value < alpha
+
+	# Store results to vector
+	sample_rejects <- c(sample_rejects, reject)
+	sample_means <- c(sample_means, mean)
+}
+
+# hist(sample_means)
+
+# Rejection rate
+sum(sample_rejects)/n_sims
+
+# Tails are fatter
+# hist(sample_means)
+
+```
+
+## Power
+
+Let's see how often we reject the null when the true population mean is different from our null (i.e. power of our test). We will use the level of confidence $\alpha = 0.05$.
+$$ H_0: \mu = 10$$
+
+$$ H_A: \mu \neq 10 $$
+
+To calculate the power, first we need to calculate the rejection region
+
+$$ 
+	P(\bar{X} \geq X^*) = .025
+$$ 
+
+$$ 
+	P(Z \geq \frac{X^* - 10}{4/\sqrt{50}}) = .025
+$$ 
+
+$$ 
+	\frac{X^* - 10}{4/\sqrt{50}} = 1.96 \implies X^* = 11.11
+$$ 
+
+Then, power is the probability of being in the rejection region, given a true population mean, in our case $\mu = 11$. 
+
+$$
+	P(\bar{X} \geq 11.11 \vert \mu = 11)
+$$
+
+$$
+	P(Z \geq \frac{11.11 - 11}{4/\sqrt{50}}) = P(Z \geq 0.1944) = 0.422
+$$
+
+
+```{r title="Size"}
+n_sims <- 10000
+
+# Can use normal z-score
+n <- 50
+alpha <- 0.05
+true_mean <- 10.5
+
+sample_means <- c()
+sample_rejects <- c()
+
+for(i in 1:n_sims){
+	
+	draws <- rnorm(n, mean = true_mean, sd = 4)
+	mean <- mean(draws)
+
+	# Standardize Mean given the null is true
+	z_score <- (mean - 10)/(4/sqrt(n))
+	
+	# p-value = 2 * P(z <= - |z-score|)
+	z_score <- -abs(z_score)
+	p_value <- 2*pnorm(z_score)
+	
+	# reject if p_value < alpha
+	reject <- p_value < alpha
+	
+	# Store results to vector
+	sample_rejects <- c(sample_rejects, reject)
+	sample_means <- c(sample_means, mean)
+}
+
+# Rejection rate
+sum(sample_rejects)/n_sims
+
+hist(sample_means)
+
+```
+
+
+# Two-sided t-test
+
+Class Exercise, fill in the missing code to calculate a two-sided t-test by hand.
+
+$$ 
+	H_0: \mu_1 - \mu_2 = 0 
+$$
+$$
+	H_A: \mu_1 - \mu_2 > 0
+$$
+
+Our z-stat in this case is 
+
+$$
+	Z\text{-stat} = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sqrt{\sigma_1/n_1 + \sigma_2/n_2}}
+$$
+
+And our p-value is 
+$$
+	P (Z \geq Z\text{-stat}) 
+$$
+
+```{r title="two-sided Z-test"}
+set.seed(1)
+
+# Random Sample of group 1 and 2
+x1 <- rnorm(50, mean = 10, sd = 5)
+x2 <- rnorm(35, mean = 11, sd = 5)
+
+# Calculate means
+mean1 <- mean(x1)
+mean2 <- mean(x2)
+		
+# Calculate z-stat
+diff_in_means <- mean1 - mean2
+
+z_score <- (mean1 - mean2) / sqrt((25/50) + (25/35))
+	
+# Calculate p-value
+p_value <- 1 - pnorm(z_score)
+
+p_value
+
+
+```
+
+
+```{r title="two-sided t-test"}
+set.seed(1)
+
+# Random Sample of group 1 and 2
+x1 <- rnorm(24, mean = 10, sd = 5)
+x2 <- rnorm(15, mean = 11, sd = 5)
+
+# Calculate means
+mean1 <- mean(x1)
+mean2 <- mean(x2)
+
+var1 <- var(x1)
+var2 <- var(x2)
+		
+# Calculate z-stat
+t_score <- (mean1 - mean2) / sqrt((var1/24) + (var2/15))
+	
+# Calculate p-value
+# Note you have to supply t_score and degrees of freedom to tnorm()
+# Type ?pt into the terminal to learn how to use this
+p_value <- pt(t_score, df = 14)
+
+p_value
+
+
+
+
+```
+
+
+

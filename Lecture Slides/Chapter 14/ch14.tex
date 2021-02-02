@@ -1,0 +1,324 @@
+\documentclass{beamer}
+\usetheme{metropolis} % Use metropolis theme
+
+\title{ECON 3818: Introduction to Statistics with Computer Applications}
+%\subtitle
+\date{\today}
+\author{Kyle Butts}
+
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{HTML}{EB0E09}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+\definecolor{maroon}{HTML}{AF3335}
+\definecolor{purple}{HTML}{7E90B8}
+
+\definecolor{mybackground}{HTML}{ECECEC}
+\setbeamercolor{background canvas}{bg= mybackground}
+
+\definecolor{buff-gold}{HTML}{CFB87C}
+\definecolor{buff-grey}{HTML}{565A5C}
+\definecolor{buff-lightgrey}{HTML}{A2A4A3}
+\definecolor{buff-black}{HTML}{000000}
+
+\setbeamercolor{alerted text}{fg=buff-gold!80!black}
+\setbeamercolor{frametitle}{bg=buff-black}
+\setbeamercolor{title}{fg=buff-grey}
+\setbeamercolor{button}{bg=buff-gold}
+
+% Allow to remove indent w/ \begin{itemize}[leftmargin= *]
+\usepackage{enumitem}
+\setlist[itemize]{label= \textbullet}
+
+% \usepackage[libertine]{newtxmath}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+
+\begin{document}
+
+% Title Page ---------------------------------------
+\maketitle
+
+
+
+
+% Chapter 14 ---------------------------------------
+
+\section{Chapter 14: Binomial Distribution}
+\begin{frame}{Binomial Distribution}
+	
+	\begin{itemize}
+		\item Probability model used when there are two outcomes: success or failure
+		      \begin{itemize}
+		      	\item One trial -- \alert{Bernoulli distribution}
+		      	\item Multiple trials -- \alert{Binomial distribution}
+		      \end{itemize}
+		\item Examples:
+		      \begin{itemize}
+		      	\item Flipping a coin, shooting a free throw
+		      \end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Bernoulli Distribution}
+	
+	\begin{itemize}
+		\item If X follows a Bernoulli process, then we say that $$X \sim B(1,p)$$
+		      \begin{itemize} 
+		      	\item where 1 tells us the number of trials
+		      	\item and p tells us the probability of success
+		      	\item $\sim$: "is distributed"
+		      \end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Binomial Distribution}
+	
+	Generally, we focus on situations where we have more than one trial so we use the \alert{binomial distribution}
+	\begin{itemize}
+		\item \underline{The Binomial Setting}
+		      \begin{itemize}
+		      	\item There are a fixed number, n, trials 
+		      	\item These n trials are all independent
+		      	\item Each trial falls into one of just two categories -- "success" or "failure"
+		      	\item The probability of success, p, is the same for each observations
+		      \end{itemize}
+		\item Notation, $X \sim B(n,p)$
+		      \begin{itemize}
+		      	\item where n, p are \textit{parameters}
+		      \end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Binomial Example}
+	
+	Shaquille O'Neal is allowed 5 free throw shots. He has a 60\% chance of making each shot. What is the probability he makes 3 out of the 5 shots?
+	\begin{itemize}
+		\item Setting up a binomial:
+		      \begin{itemize} 
+		      	\item There are fixed number of trials,\checkmark yes, n=5
+		      	\item These trials are independent \checkmark 
+		      	\item Each trial falls into one of two categories \checkmark yes, miss or make
+		      	\item Probability it the same for each trial \checkmark yes, p=0.6
+		      \end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Clicker Question}
+	
+	For which of the following counts would a binomial probability model be reasonable?
+	
+	\begin{enumerate}[label=(\alph*)]
+		\item the number of phone calls received in a one-hour period
+		\item the number of hearts you draw when you select 5 cards from a standard deck of 52 cards
+		\item the number of sevens in a randomly selected set of five digits from a table of random digits
+	\end{enumerate}
+	
+\end{frame}
+
+
+
+\begin{frame}{Binomial Example}
+	
+	\textbf{Important: There is more than one way to make 3 out 5 free throws}
+	\begin{columns}
+		\column{0.5\textwidth}
+		\footnotesize{
+			\begin{enumerate}
+				\item[1.] Make, Make, Make, Miss, Miss
+				\item[2.] Make, Make, Miss, Miss, Make
+				\item[3.] Make Make, Miss, Make, Miss
+				\item[4.] Make, Miss, Miss, Make, Make
+				\item[5.] Make, Miss, Make, Miss, Make
+			\end{enumerate}}
+		\column{0.5\textwidth}
+		\footnotesize{
+			\begin{enumerate}
+				\item[6.] Miss, Make, Make, Make, Miss
+				\item[7.] Miss, Make, Make, Miss, Make
+				\item[8.] Miss, Make, Miss, Make, Make
+				\item[9.] Miss, Make, Make, Make, Miss
+				\item[10.] Miss, Miss, Make, Make, Make
+			\end{enumerate}}
+	\end{columns}
+	
+\end{frame}
+
+\begin{frame}{Binomial Coefficient}
+	
+	First step to solving a binomial probability is to calculate the number of different ways of getting exactly that many success in n observations.
+	\begin{itemize} 
+		\item The number of ways of getting k successes in n trials is given by the \alert{Binomial Coefficient}: \[ 
+			{n \choose k}= \frac{n!}{k!(n-k)!}
+		\]
+	
+		\item ${n \choose k}$ is read "n choose k" which means "how many different ways to get k successes in n trials" (you can google n choose k and the calculator will tell you)
+		
+		\item n! = $n*(n-1)*(n-2)...(3)*(2)*(1)$
+		      \begin{itemize}
+		      	\item Example: 5! = $5*4*3*2*1$=120
+		      	\item Note: 0! = 1
+		      \end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Binomial Formula}
+	
+	Formula tells us the probability of getting k successes in n trials:
+	$$P(X=k) = {n \choose k} p^k (1-p)^{n-k}$$
+	\begin{itemize}
+		\item ${n \choose k}$: number of ways to get k successes in n trials
+		\item $p^k$: probability of success, raised by the number of successes
+		\item $(1-p)^{n-k}$: probability of failure, raised by the number of failures
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Binomial Example}
+	
+	Back to our previous example. Shaq is shooting 5 free throws and has a 60\% chance of making each one. What is the probability he makes 3?
+	$$P(X=3) = {5 \choose 3}*0.6^3*0.4^2$$
+	$$P(X=3) = 0.3456$$
+	
+\end{frame}
+
+\begin{frame}{Clicker Question}
+	
+	What is the probability of making 4 out of 6 penalty kicks if the probability of scoring is 70\%?
+	
+	\begin{enumerate}[label=(\alph*)]
+		\item 70\%
+		\item 2.2\%
+		\item 32.4\%
+		\item 65.47\%
+		      
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Binomial Probabilities}
+	
+	\begin{itemize}
+		\item The binomial formula
+		$$P(X=k) = {n \choose k} p^k (1-p)^{n-k}$$
+		only calculates the probability that X is equal to one specific (discrete) number.
+		
+		\item In order to calculate the probability that X takes on multiple value means we must use this formula repeatedly
+		 
+		\item What if we wanted to know the probability that Shaq makes at least two of the five free throws?
+		
+	\end{itemize}
+	
+\end{frame}
+
+%\begin{frame}{Example}
+%
+%A local veterinary clinic typically sees 15\% of its horses presenting with West Nile virus. If 10 horses are admitted during July, what is the probability that 2 or fewer horses among the 10 horses admitted have been infected with West Nile virus?
+
+%
+%\end{frame}
+
+\begin{frame}{Cumulative Binomial Probabilities}
+	
+	Recall the probability rule:
+	$$P(A^c)=1-P(A)$$
+	We can use this when calculating binomial probabilities. Make sure to pay attention to the wording!
+	
+	\begin{itemize}
+		\item \alert{At least} is inclusive. 
+		      \begin{itemize}
+		      	\item P(at least 1) = $P(X\geq1)=1-P(X=0)$
+		      \end{itemize}
+		\item \alert{More than} is not inclusive
+		      \begin{itemize}
+		      	\item P(more than 1)=$P(X>1)=1-P(X=0)-P(X=1)$
+		      \end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Cumulative Example}
+	What is the probability that Shaq makes at least two out of his five free throws?
+	$$P(X\geq2)=1-P(X=0)-P(X=1)$$
+	\begin{itemize}
+		\item $P(X=0)= {5 \choose 0}*0.6^0*0.4^5 = 0.010$
+		\item $P(X=1)= {5 \choose 1}*0.6^1*0.4^4 = 0.077$
+		\item $1 - 0.01 - 0.077 = 0.913$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Clicker Question}
+	
+	You are asking someone out on a date. Your probability of success is 35\% each time you try. If you ask out 4 people, what are the odds that you get at least one yes?
+	
+	\begin{enumerate}[label=(\alph*)]
+		\item 98.5\%
+		\item 1.5\%
+		\item 82.15\%
+		\item 17.85\%
+	\end{enumerate}
+	
+\end{frame}
+
+
+\begin{frame}{Binomial Mean and Standard Deviation}
+	
+	If $X \sim B(n,p)$, the \alert{mean} and \alert{standard deviation} of X are:
+	\begin{itemize}
+		\item $\mu = np$
+		\item $\sigma = \sqrt{np(1-p)}$
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Clicker Question (Midterm Example)}
+	If X has a binomial distribution with 20 trials and a mean of 6, then the success probability, $p$, is:
+	\begin{enumerate}[label=(\alph*)]
+		\item 0.3
+		\item 0.5
+		\item 0.75
+		\item Cannot be determined given the information
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Recognizing the Binomial Setting}
+	Which of the three scenarios would it be reasonable to use a binomial distribution for random variable X?
+	\begin{itemize}
+		\item An auto manufacturer chooses one car from each hour's production for a quality inspection. The variable X is the count of defects in the car's paint
+		      % Here X could be more than 2 values -- 1,2,3, etc. Any number of defects. An example where X would be binomial would be X =1 if there are any defects; 0 if no defects
+		\item The pool of potential jurors for a murder case contains 100 people chosen at random. Each person in in the pool is asked whether they oppose the death penalty. X is the number of people who say yes
+		      % Yes, here X can only be two values, 1 if approve death penalty 0 if disapprove. Then p would be the probability an individual picked at random approves of the death penalty
+		\item Joe buys a ticket in his state's lottery game every week. X is the number of times in that year that he receives a prize.
+		      % Yes, here X can be two values. 1 if Joe wins anything 0 if Joe wins nothing. So p would be the porbability that Joe wins ANY prize on lottery ticke.t
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+	
+	You're taking an exam consisting of 8 multiple choice questions, each with 4 available answers. You forgot to study, so you have to guess on every question. What is the probability you only get 2 questions wrong?
+	
+	\begin{enumerate}[label=(\alph*)]
+		\item 0.3114
+		\item 0.0038
+	\end{enumerate}
+	
+\end{frame}
+
+
+%\begin{frame}{Example}
+%A very large gardening business grows rose bushes for sale to garden stores around the world. The most popular %colors are red, pink, and white. The business decides on 50\% red roses, 30\% pink, and 20\% white. A gardener %orders 9 rose bushes selected randomly from a huge field. Her primary interest is in pink roses. Assuming rose %bushes are selected independently, what is the probability of getting at least 3 pink rose bushes?
+% 
+%$$P(X\geq3)=0.534$$
+%\end{frame}
+
+
+
+
+
+\end{document}

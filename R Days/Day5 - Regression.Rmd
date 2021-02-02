@@ -1,0 +1,171 @@
+---
+title: "Regression"
+author: "Kyle F. Butts"
+date: "11/20/2020"
+output: html_document
+---
+
+# Load ACS Data
+
+```{r, include = FALSE}
+df <- read.csv("~/Desktop/3818/R Days/USA_cars_datasets.csv")
+
+df
+```
+
+
+
+# t-test for car color
+
+Do red cars and black cars sell for the same price?
+
+$$ H_0: \mu_r - \mu_b = 0$$ 
+$$ H_A : \mu_r - \mu_b > 0$$
+
+
+```{r, include = FALSE}
+
+is_red <- df$color %in% c("red", "blue", "yellow")
+is_black <- df$color == "black"
+
+n_red <- sum(is_red)
+n_black <- sum(is_black)
+
+# df[rows you want, columns you want]
+cars_black <- df[is_black, ]
+cars_red <- df[is_red, ]
+
+```
+
+
+```{r}
+# 2 sample Z-test
+mu_black <- mean(cars_black$price)
+mu_red <- mean(cars_red$price)
+
+sd_black <- sd(cars_black$price)
+sd_red <- sd(cars_red$price)
+
+z_score <- (mu_red - mu_black)/sqrt(sd_red^2/n_red + sd_black^2/n_black)
+
+1 - pnorm(z_score)
+
+```
+
+Since the p-value is larger than 0.05, with 95% confidence, I fail to reject that red cars and black cars sell for the same price.
+
+
+# Regression
+
+```{r}
+plot(df$mileage, df$price)
+```
+
+```{r}
+# Removing Outliers
+df <- df[df$mileage < 300000, ]
+df <- df[df$price < 60000, ]
+
+plot(df$mileage, df$price)
+```
+
+
+# Regressions
+
+Regression is done by `lm()` function. Specifically the format looks like this:
+
+`reg <- lm(df$y_var ~ df$x_var)`
+
+To see the summary, you can type `summary(reg)`.
+
+```{r}
+# price = a + b * mileage
+
+reg <- lm(df$price ~ df$mileage)
+
+reg
+summary(reg)
+
+```
+
+```{r}
+plot(df$mileage, df$price, col= "red") + abline(reg)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Simpson's Paradox
+
+```{r Load data}
+library(palmerpenguins)
+data(penguins)
+
+penguins
+
+```
+
+```{r}
+# Scatter plot of Bill Depth (mm) and Body Mass (g)
+plot(penguins$bill_depth_mm, penguins$body_mass_g)
+
+cor.test(penguins$body_mass_g, penguins$bill_depth_mm)
+
+# Regression
+reg1 <- lm(penguins$body_mass_g ~ penguins$bill_depth_mm)
+
+summary(reg1)
+
+plot(penguins$bill_depth_mm, penguins$body_mass_g) + abline(reg1) 
+
+```
+
+
+
+```{r}
+# Seperately by penguin species
+library(ggplot2)
+
+ggplot(penguins, aes(x = bill_depth_mm, y = body_mass_g)) + 
+	geom_point(aes(color = species)) + 
+	geom_smooth(method = "lm", aes(color = species))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

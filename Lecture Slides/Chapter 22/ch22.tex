@@ -1,0 +1,377 @@
+\documentclass{beamer}
+\usetheme{metropolis} % Use metropolis theme
+
+\title{ECON 3818: Introduction to Statistics with Computer Applications}
+%\subtitle
+\date{\today}
+\author{Kyle Butts}
+
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{HTML}{EB0E09}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+\definecolor{maroon}{HTML}{AF3335}
+\definecolor{purple}{HTML}{7E90B8}
+\definecolor{buff-gold}{HTML}{CFB87C}
+\definecolor{buff-grey}{HTML}{565A5C}
+\definecolor{buff-lightgrey}{HTML}{A2A4A3}
+\definecolor{buff-black}{HTML}{000000}
+
+\definecolor{mybackground}{HTML}{ECECEC}
+\setbeamercolor{background canvas}{bg= mybackground}
+
+\setbeamercolor{alerted text}{fg=buff-gold!80!black}
+\setbeamercolor{frametitle}{bg=buff-black}
+\setbeamercolor{title}{fg=buff-grey}
+\setbeamercolor{button}{bg=buff-gold}
+
+% Allow to remove indent w/ \begin{itemize}[leftmargin= *]
+\usepackage{enumitem}
+\setlist[itemize]{label= \textbullet}
+
+% \usepackage[libertine]{newtxmath}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+% Font ---------------------------------------------
+\usepackage[libertine]{newtxmath}
+
+\begin{document}
+
+% Title Page ---------------------------------------
+\maketitle
+
+% Chapter 22 ---------------------------------------
+\section{Chapter 22: Inference about a Population Proportion}
+
+\begin{frame}{Inference about a Population Proportion}
+	
+	Previously we have discussed making inference in population \textit{means}
+	
+	This chapter talks about questions where we're interested in the proportion of an outcome 
+	\begin{itemize}
+		\item Percent of adults that have multiple partners
+			\begin{itemize}
+				\item single population proportion
+			\end{itemize}
+		      
+		\item Is there a difference between the proportion of male students and proportion of female students that smoke cigarettes
+			\begin{itemize}
+				\item comparing two population proportions
+			\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+
+\begin{frame}{The Sample Proportion, $\hat{p}$}
+	
+	The statistic that estimates the population proportion, $p$, is the \alert{sample proportion}:
+	\[
+		\hat{p}=\frac{\text{number of successes in the sample}}{n}
+	\]
+	For example: 
+	
+	Say we want to estimate the proportion of heterosexual adults who have had more than one sexual partners in the past year. To estimate this proportion, a researcher collected survey data and contacted 2673 people, and 170 said they had multiple sex partners
+	\[
+		\hat{p}=\frac{170}{2673}=0.0636
+	\]
+	
+\end{frame}
+
+\begin{frame}{Binomial Distribution Review}
+
+	
+
+\end{frame}
+
+\begin{frame}{Sampling Distribution of a Sample Proportion}
+	We can think of random variables as binary (take only two values) and use Bernoulli distribution
+	\begin{itemize}
+		\item Assign one outcome 0 and the other outcome 1
+		
+		\item $X \sim B(1,p)$
+		
+		\item This means $p$ is the \textbf{unobserved} probability of outcome 1
+	\end{itemize}
+	
+	We use the sample statistic $\hat{p}=\frac{\text{number of successes}}{\text{total observations}}$
+
+	\begin{itemize}
+		\item \footnotesize{The \alert{mean} of the sampling distribution is $p$}
+		\item \footnotesize{The \alert{standard deviation} of the sampling distribution is} $\sqrt{\frac{p(1-p)}{n}}$
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Sampling Distribution of a Sample Proportion}
+	Say we draw a simple random sample of size $n$ from a large population that contains $p$ proportion of successes.  Let $\hat{p}$ be the \alert{sample proportion} of successes,
+	\[
+		\hat{p}=\frac{\text{number of successes in the sample}}{n}
+	\]
+	
+	The \alert{Central Limit Theorem} tells us that with a large enough sample size, the standardized value of $\hat{p}$ will be approximately normal:
+	\[
+		\frac{\hat{p}-p}{\sqrt{p(1-p)/n}}
+	\]
+
+\end{frame}
+
+
+\begin{frame}{Clicker Question}
+	
+	A study investigated ways to prevent staph infections in surgery patients. In a first step, the researchers examined the nasal secretions of a random sample of 6771 patients admitted to various hospitals for surgery. They found that 1251 of these patients tested positive for \textit{Staphylococcus aureus}, a bacterium responsible for most staph infections.
+	
+	What is the population and what is the parameter $p$?
+	
+	Calculate the statistic $\hat{p}$ that estimates $p$
+	\begin{enumerate}[label=(\alph*)]
+		\item 5.41
+		\item 0.185
+		\item 0.341
+	\end{enumerate}
+	
+\end{frame}
+
+\frame
+
+\begin{frame}{Election Tomorrow}
+	A poll by YouGov asked 1360 voters in Pennsylvania if they were going to vote for Biden or Trump. We will code a vote for Biden $=1$, so the proportion $\hat{p}$ is the proportion of people who will vote for biden. Biden will win Pennsylvania if the population portion is $p > .5$. 
+
+	They find that $\hat{p} = .53$. What is the sampling distrubtion of $\hat{p}$? 
+
+
+	{\footnotesize Source: https://projects.fivethirtyeight.com/polls/}
+
+\end{frame}
+
+\frame 
+
+\begin{frame}{What's the probability Biden Wins PA?}
+	Using the sampling distribution, what's the probability that $p > .50$?
+\end{frame}
+
+\frame
+ 
+
+% \begin{frame}{Clicker Question}
+% 	Only 30\% of American adults eat breakfast daily. A cereal manufacturer contacts an SRS of 1500 American adults to see what proportion of them consume breakfast daily.. What is the approximate distribution of $\hat{p}$?
+% 	\begin{enumerate}[label=(\alph*)]
+% 		\item $\hat{p} \sim N(0.3, \ 0.00014)$
+% 		\item $\hat{p} \sim N(0.3, \ 0.0118)$
+% 		\item $\hat{p} \sim N(0.02, \ 0.0118)$
+% 	\end{enumerate}	
+% \end{frame}
+
+
+
+\begin{frame}{Confidence Intervals for a Population Proportion}
+	
+	We follow the same path from sampling distribution to confidence interval as we did for $\bar{X}$
+	
+	Note, the standard deviation of $\hat{p}$ depends on the parameter $p$ -- a value that we don't know. We therefore estimate the standard deviation with the standard error of $\hat{p}$:
+
+	\[ 
+		SE_{\hat{p}}=\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} 
+	\]
+	
+\end{frame}
+
+\begin{frame}{Confidence Intervals for a Population Proportion}
+	
+	Say we draw a simple random sample of size $n$ from a large population that contains an unknown proportion $p$ of successes. An approximate C\% \alert{confidence interval} for p is:
+	
+	\[ 
+		\hat{p} \pm Z^\frac{1-C}{2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} 
+	\]
+	
+	What do we mean by large? Can only use this confidence interval when number of successes and failures in the sample are both at least 15 (to remember, half of 30 each)
+	
+\end{frame}
+
+\begin{frame}{Example}
+	A poll by YouGov asked 1360 voters in Pennsylvania if they were going to vote for Biden or Trump. We will code a vote for Biden $=1$, so the proportion $\hat{p}$ is the proportion of people who will vote for biden. Biden will win Pennsylvania if the population portion is $p > .5$. 
+
+	They find that $\hat{p} = .53$. What is the sampling distrubtion of $\hat{p}$? 
+
+	
+	Check the conditions:
+	\begin{itemize}
+		\item SRS $\checkmark$
+		\item number of success (1360 * 0.53) and failures (1360 * 0.47) are both larger than 15 $\checkmark$
+	\end{itemize}
+
+	So we can go ahead and calculate a 95\% confidence interval for the population parameter $p$... 
+\end{frame}
+
+\frame
+
+
+% \begin{frame}{Example}
+% 	The behavioral survey  found that 170 individuals of a simple random sample of 2673 adult heterosexuals had had multiple partners. That is $\hat{p}=\frac{170}{2673}=0.0636$. Provide a 99\% confidence interval for the proportion $p$ of all adult heterosexuals who have multiple partners.
+	
+% 	Check the conditions
+% 	\begin{itemize}
+% 		\item SRS $\checkmark$
+% 		\item number of success (170) and failures (1503) are both larger than 15 $\checkmark$
+% 	\end{itemize}
+% 	So we can go ahead and calculate the confidence interval......
+% \end{frame}
+
+% \begin{frame}{Example}
+% 	$$\hat{p} \pm Z^\frac{1-C}{2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = $$
+% 	$$0.0636 \pm 2.576 \cdot \sqrt{\frac{(0.0636)\cdot(0.9364)}{2673}}$$
+	
+% 	$$0.0514 \text{ to } 0.0758$$
+	
+% 	We are 99\% confident that the mean proportion of heterosexual adults who have had more than one partner in the past year is between 5.14\% and 7.58\%.
+% \end{frame}
+
+
+
+%\begin{frame}{Choosing Sample Size}
+%Similar to previous confidence intervals, we can choose the necessary sample size to get a desired margin of error.
+%Recall, the margin of error is $m=z^*\sqrt{\hat{p}(1-\hat{p}/n}$
+%
+%The level C confidence interval for a population proportion $p$ will have margin of error approximately equal to a specified value $m$ when the sample size is:
+%$$n=(\frac{Z^*}{m})^2 \cdot p$$
+%\end{frame}
+
+
+\begin{frame}{Clicker Question}
+	We are given that n=670, $\hat{p}=0.85$, we will use the standard error of the sample proportion as
+	$$SE_{\hat{p}}=\sqrt{\hat{p}(1-\hat{p})/n}$$
+	Which of the following is the correct calculation for a 95\% confidence interval?
+	\begin{enumerate}[label=(\alph*)]
+		\item $0.85 \pm 1.96 \cdot \sqrt{\frac{0.85\cdot 0.15}{670}}$ %%
+		\item $0.85 \pm 1.645 \cdot \sqrt{\frac{0.85\cdot 0.15}{670}}$
+		\item $0.85 \pm 1.96 \cdot \frac{0.85\cdot 0.15}{\sqrt{670}}$
+		\item $571 \pm 1.96 \cdot \sqrt{\frac{571\cdot 99}{670}}$
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Hypothesis Testing}
+	We design a hypothesis test such as:
+	\[ 
+		H_0: \hat{p}=p_0 \text{ vs. } H_1: \hat{p} \neq p_0 
+	\]
+	Or one-sided alternatives, such as: $\hat{p} < p_0$ or $\hat{p} > p_0$.
+	
+	We reject $H_0$ if our p-value is lower than our level of significance
+	\begin{itemize}
+		\item p-value: probability of calculating the sample proportion, or more extreme value, if the null hypothesis is true
+		\item level of significance: predetermined by the size of the test.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Test Statistic}
+	Draw an SRS of size $n$ from a large population that contains an unknown proportion $p$ of successes. To test the hypothesis $H_0: \hat{p}=p_0$, compute the following z-statistic:
+	\[ 
+		Z=\frac{\hat{p}-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
+	\]
+	
+	Use this test when the sample size $n$ is so large that both $n \cdot p_0$ and $n \cdot (1-p_0) = 15$ or more.
+\end{frame}
+
+
+\begin{frame}{Breakout Group}
+	A survey found that 571 out of 670 (85\%) of Americans answered a question on experimental design correctly. Do these data provide convincing evidence that more than 80\% of Americans have a good intuition about experimental design?
+	\[ 
+		H_0: p=0.8 
+	\]
+	\[ 
+		H_1: p>0.8 
+	\]
+\end{frame}
+
+\frame
+
+\begin{frame}{Breakout Group}
+	A survey found that 571 out of 670 (85\%) of Americans answered a question on experimental design correctly. Do these data provide convincing evidence that more than 80\% of Americans have a good intuition about experimental design?
+	\[ 
+		H_0: p=0.8 
+	\]
+	\[ 
+		H_1: p>0.8 
+	\]
+
+	Calculate the the p-value:
+	\[ 
+		P(\hat{p}>0.85 \ \vert \ p=0.8) 
+	\]
+	\[ 
+		P(Z > \frac{0.85-0.8}{\sqrt{\frac{0.8 \cdot 0.2}{670}}}) = P(Z > 3.25) = 0.0006 
+	\]
+
+	Since  p-value $= 0.0006 < \alpha = 0.05$, reject $H_0$.
+	
+
+\end{frame}
+
+
+\begin{frame}{Yesterday's Election: Hypothesis Testing}	
+	On Nov. 1st, the New York Times and Siena College released a poll for Wisconsin with $n = 1253$ and the sample proportion of people supporting Biden was $\hat{p} = 0.52$. On election day, we learned the population proportion supporting Biden was $p = 0.496$. Would we have rejected the following hypothesis at the $\alpha = 0.05$ significance level.
+	\[ 
+		H_0: p = 0.496
+	\]
+	\[ 
+		H_1: p > 0.496
+	\]
+\end{frame}
+
+\frame
+
+\begin{frame}{Election Polling and Simple Random Sample}	
+	Why did we reject the null hypothesis which was true? Which of the following problems do we think occured (list from ch. 9)?
+
+	\begin{itemize}
+		\item \alert{Undercoverage}: when some groups in the population are left out of the process of choosing the sample
+		\item \alert{Oversampling}: when some groups are sampled more often than others in a way that is not representative of the population
+		\item \alert{Nonresponse}: when an individual chosen for the sample can't be contacted or refuses to participate
+		\item \alert{Response Bias}: a systematic pattern of incorrect responses in a sample survey
+		\item \alert{Wording Effect}: a systematic pattern of responses due to poor (or manipulated) wording of survey questions
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Breakout Group}
+	Suppose you are an epidemiologist studying cancer incidence in an old manufacturing town. It is believed the cancer incidence in this town is above average. You know that the proportion of the national population that has a certain certain cancer is 0.03. The manufacturing town has an observed cancer incidence of 0.045 among a sample of 400 residents. Test the following hypothesis at the $\alpha = 0.05$ significance level.
+	
+	\[ 
+		H_0: p = 0.03
+	\]
+	\[ 
+		H_1: p > 0.03
+	\]
+
+	\begin{enumerate}[label=(\alph*)]
+		\item Reject $H_0$
+		\item Fail to reject $H_0$
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Breakout Group}
+	Suppose you are an epidemiologist studying cancer incidence in an old manufacturing town. It is believed the cancer incidence in this town is above average. You know that the proportion of the national population that has a certain certain cancer is 0.03. The manufacturing town has an observed cancer incidence of 0.045 among a sample of 400 residents. Test the following hypothesis at the $\alpha = 0.05$ significance level.
+
+	For what region of sample proportions $\hat{p}$ will you reject the following null hypothesis at the $\alpha = 0.05$ significance level.
+
+		
+	\[ 
+		H_0: p = 0.03
+	\]
+	\[ 
+		H_1: p > 0.03
+	\]
+	
+
+\end{frame}
+
+
+
+
+
+
+\end{document}

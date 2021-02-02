@@ -1,0 +1,205 @@
+\documentclass{beamer}
+\usetheme{metropolis} % Use metropolis theme
+
+\title{ECON 3818: Introduction to Statistics with Computer Applications}
+%\subtitle
+\date{\today}
+\author{Kyle Butts}
+
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{HTML}{EB0E09}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+\definecolor{maroon}{HTML}{AF3335}
+\definecolor{purple}{HTML}{7E90B8}
+
+\definecolor{mybackground}{HTML}{ECECEC}
+\setbeamercolor{background canvas}{bg= mybackground}
+
+\definecolor{buff-gold}{HTML}{CFB87C}
+\definecolor{buff-grey}{HTML}{565A5C}
+\definecolor{buff-lightgrey}{HTML}{A2A4A3}
+\definecolor{buff-black}{HTML}{000000}
+
+\setbeamercolor{alerted text}{fg=buff-gold!80!black}
+\setbeamercolor{frametitle}{bg=buff-black}
+\setbeamercolor{title}{fg=buff-grey}
+\setbeamercolor{button}{bg=buff-gold}
+
+% Allow to remove indent w/ \begin{itemize}[leftmargin= *]
+\usepackage{enumitem}
+\setlist[itemize]{label= \textbullet}
+
+% \usepackage[libertine]{newtxmath}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+
+\begin{document}
+
+% Title Page ---------------------------------------
+\maketitle
+
+
+% Chapter 23 ---------------------------------------
+\section{Chapter 23: Comparing Two Proportions}
+\begin{frame}{Notation}
+	We will use notation similar to that used in our study of two-sample t-statistics.
+	
+	\begin{center}
+		\scalebox{0.9}{
+			\begin{tabular}{|c|c|c|c|}
+				\hline
+				\textbf{Population} & \textbf{Pop. Proportion} & \textbf{Sample Size} & \textbf{Sample Proportion} \\ [0.5ex]
+				\hline
+				1 & $p_1$ & $n_1$ & $\hat{p}_1$ \\
+				\hline
+				2 & $p_2$ & $n_2$ & $\hat{p}_2$ \\
+				\hline
+			\end{tabular}
+		}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Sampling Distribution of $\hat{p}$ Review}
+	$X \sim B(1, p)$ is the underlying variable. 
+
+	\[ \hat{p} = \frac{\sum \text{\# of successes}}{n} \]
+
+	The sample distribution of $\hat{p}$ with population proportion $p_0$:
+
+	\[ \hat{p} \sim N( p_0, \frac{p_0(1-p_0)}{n}) \]	
+\end{frame}
+
+
+\begin{frame}{Sampling Distribution of a Difference between Proportions}
+	To use $\hat{p}_1 - \hat{p}_2$ for inference we use the following information:
+	
+	\begin{itemize}
+		\item When the samples are large, the distribution of $\hat{p}_1 - \hat{p}_2$ is \alert{approximately normal}
+		
+		\item The \alert{mean} of the sampling distribution is: $p_1 - p_2$
+		
+		\item Assuming the two populations are independent, the \alert{standard deviation} of the distribution is: 
+			\[ 
+				\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}} 
+			\]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Normal Distribution Review}
+	If $X_1 \sim N(\mu_1, \sigma_1^2)$ and $X_2 \sim N(\mu_2, \sigma_2^2)$ are normally distributed and indepdent, then $X_1 - X_2$ is normally distributed,
+
+	\[ E\{X_1 - X_2\} = \mu_1 - \mu_2, \]
+
+	\[ Var(X_1 - X_2) = \sigma_1^2 + \sigma_2^2 \]
+\end{frame}
+
+\begin{frame}{Large-Sample Confidence Intervals for Comparing Proportions}
+	Using the equation for standard error:
+	\[ 
+		SE = \sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \frac{\hat{p}_2(1-\hat{p}_2)}{n_2}} 
+	\] 
+	The confidence interval is constructed as:
+	\[ 
+		\hat{p}_1 - \hat{p}_2 \pm Z^* SE 
+	\] 
+\end{frame}
+
+\begin{frame}{Example}
+	Construct a 95\% confidence interval for the following difference in proportions:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Population} & \textbf{\# Successes} & \textbf{Sample Size} & \textbf{Sample Proportion} \\ [0.5ex]
+			\hline
+			1          & $75$         & $100$       & $\hat{p}_1=0.75$  \\
+			\hline
+			2          & $56$         & $100$       & $\hat{p}_2=0.56$  \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+\frame
+
+\begin{frame}	
+	Construct a 95\% confidence interval for the following difference in proportions:
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Population} & \textbf{\# Successes} & \textbf{Sample Size} & \textbf{Sample Proportion} \\ [0.5ex]
+			\hline
+			1          & $75$         & $100$       & $\hat{p}_1=0.75$  \\
+			\hline
+			2          & $56$         & $100$       & $\hat{p}_2=0.56$  \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\[ 
+		SE=\sqrt{\frac{(0.75)(0.25)}{100}+\frac{(0.56)(0.44)}{100}}=0.0659
+	\]
+
+	Confidence interval = $(0.75-0.56)\pm(1.96)(0.0659) \implies 0.06 \text{ to } 0.32$
+\end{frame}
+
+
+\begin{frame}{Significance Tests for Comparing Proportions}
+	\[ 
+		H_0: p_1 - p_2 = 0 
+	\]
+	\[ 
+		H_1: p_1 - p_2 \neq 0 
+	\]
+	In order to test the hypothesis, we must first calculated the \alert{pooled sample proportion}
+	
+	\[ \hat{p}=\frac{\text{number of successes in \textit{both samples combined}}}{\text{number of individuals in \textit{both samples combined}}} 
+	\]
+	Then we use the following z-statistic:
+	
+	\[ \frac{\hat{p}_1-\hat{p}_2}{\sqrt{\hat{p}(1-\hat{p})\big(\frac{1}{n_1}+\frac{1}{n_2}\big)}} 
+	\]
+\end{frame}
+
+\begin{frame}{Example}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Population} & \textbf{\# Successes} & \textbf{Sample Size} & \textbf{Sample Proportion} \\ [0.5ex]
+			\hline
+			1 & $212$ & $616$ & $\hat{p}_1 = 0.344$ \\
+			\hline
+			2 & $7$ & $49$ & $\hat{p}_2 = 0.143$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\pause \begin{itemize}
+		\item Calculate \[ 
+			\hat{p} = \frac{212+7}{616+49} = 0.329 
+		\]
+		\item Calculate Z-statistic
+	\end{itemize}
+	
+	\[ 
+		Z= \frac{0.344-0.143}{\sqrt{(0.329)(0.671) \left(\frac{1}{616}+\frac{1}{49}\right)} } =2.88
+	\]
+\end{frame}
+
+\begin{frame}{Example -- continued}
+	The z-statistic was 2.88, and we have a two-tailed alternative hypothesis. Therefore:
+	\[ 
+		\text{p-value }= 2\cdot P(Z>2.88) = 2\cdot 0.002 = 0.004 
+	\]
+	Therefore we reject null at $\alpha = 0.05$
+\end{frame}
+
+
+
+
+
+
+\end{document}

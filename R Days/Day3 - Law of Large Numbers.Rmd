@@ -1,0 +1,285 @@
+---
+title: "Law of Large Numbers and Central Limit Theorem"
+author: "Kyle F. Butts"
+date: "9/30/2020"
+output: pdf_document
+---
+
+# For loops
+
+```{r For loops}
+for(i in 1:10) {
+	print(i)
+}
+
+```
+
+# Binomial - prob = 0.3
+
+```{r "Binomial p=0.3 - One Trial"}
+# 100 observations of Uniform Random Variable
+sample <- rbinom(n = 100, size = 10, prob = 0.3)
+
+# Histogram of sample
+hist(sample)
+
+# True mean = 10 * 0.3 = 3
+mean(sample)
+```
+
+```{r "Binomial p=0.3 - Sampling Distribution"}
+sample_means <- c()
+
+for(i in 1:1000){
+	sample <- rbinom(n = 100, size = 10, prob = 0.3)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+```
+
+```{r "Binomial p=0.3 - Play around with n_obs and n_trials"}
+n_obs <- 100
+n_trials <- 1000
+
+sample_means <- c()
+
+for(i in 1:n_trials){
+	sample <- rbinom(n = n_obs, size = 10, prob = 0.3)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+
+```
+
+
+# Confidence Intervals
+
+
+```{r "Binomial p=0.3 - Confidence Intervals"}
+
+pop_mean <- 10 * 0.3
+pop_sd <- sqrt(10 * 0.3 * 0.7)
+
+critical_value <- abs(qnorm(0.025))
+
+# 95\% Confidence Interval
+margin_of_error <- critical_value * pop_sd/sqrt(100)
+
+conf_lower <- pop_mean - margin_of_error
+conf_upper <- pop_mean + margin_of_error
+
+hist(sample_means)
+abline(v = 2.71)
+abline(v = 3.28)
+
+```
+
+
+
+```{r "Confidence Interval Example"}
+sample_means <- c()
+in_conf_interval <- c()
+
+for(i in 1:10000){
+	sample <- rbinom(n = 100, size = 10, prob = 0.3)
+	mean <- mean(sample)
+	
+	ci_lower <- mean - margin_of_error
+	ci_upper <- mean + margin_of_error
+	is_in_ci <- pop_mean >= ci_lower & pop_mean <= ci_upper
+	
+	sample_means <- c(sample_means, mean)
+	in_conf_interval <- c(in_conf_interval, is_in_ci)
+}
+	
+
+mean(in_conf_interval)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+# Binomial - prob = 0.9
+
+```{r "Binomial p=0.9 - One Trial"}
+# 100 observations of Uniform Random Variable
+sample <- rbinom(n = 100, size = 10, prob = 0.9)
+
+# Histogram of sample
+hist(sample)
+
+# True mean = 10 * 0.3 = 3
+mean(sample)
+```
+
+```{r "Binomial p=0.9 - Sampling Distribution"}
+sample_means <- c()
+
+for(i in 1:1000){
+	sample <- rbinom(n = 100, size = 10, prob = 0.9)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+```
+
+```{r "Binomial p=0.9 - Play around with n_obs and n_trials"}
+n_obs <- 100
+n_trials <- 1000
+
+sample_means <- c()
+
+for(i in 1:n_trials){
+	sample <- rbinom(n = n_obs, size = 10, prob = 0.9)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+
+```
+
+# Uniform
+
+```{r Uniform - One Trial}
+# 100 observations of Uniform Random Variable
+sample <- runif(n = 100, min = 0, max = 1)
+
+# True mean = 0.5
+mean(sample)
+```
+
+```{r Uniform - Sampling Distribution}
+sample_means <- c()
+
+for(i in 1:1000){
+	sample <- runif(n = 100, min = 0, max = 1)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+```
+
+```{r Uniform - Play around with n_obs and n_trials}
+n_obs <- 100
+n_trials <- 1000
+
+sample_means <- c()
+
+for(i in 1:n_trials){
+	sample <- runif(n = n_obs, min = 0, max = 1)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+
+```
+
+# Normal
+
+```{r Normal - One Trial}
+# 100 observations of Uniform Random Variable
+sample <- rnorm(n = 100, mean = 0, sd = 3)
+
+# Histogram of sample
+hist(sample)
+
+# True mean = 10 * 0.3 = 3
+mean(sample)
+```
+
+```{r Normal - Sampling Distribution}
+sample_means <- c()
+
+for(i in 1:1000){
+	sample <- rnorm(n = 100, mean = 0, sd = 3)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+```
+
+```{r Normal - Play around with n_obs and n_trials}
+n_obs <- 100
+n_trials <- 1000
+
+sample_means <- c()
+
+for(i in 1:n_trials){
+	sample <- rnorm(n = n_obs, mean = 0, sd = 3)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+
+```
+
+# More Complex Distribution
+
+```{r More Complex - One Trial}
+# 100 observations of Uniform Random Variable
+sample <- runif(n = 100, min = 0, max = 10) + rbinom(n = 100, size = 10, prob = 0.3) + rnorm(n = 100, mean = 0, sd= 30)
+
+# Histogram of sample
+hist(sample)
+
+# True mean = 5 + 10 * .3 + 0 = 8
+mean(sample)
+```
+
+```{r More Complex - Sampling Distribution}
+sample_means <- c()
+
+for(i in 1:1000){
+	sample <- runif(n = 100, min = 0, max = 10) + rbinom(n = 100, size = 10, prob = 0.3) + rnorm(n = 100, mean = 0, sd= 30)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+```
+
+```{r More Complex - Play around with n_obs and n_trials}
+n_obs <- 100
+n_trials <- 1000
+
+sample_means <- c()
+
+for(i in 1:n_trials){
+	sample <- runif(n = n_obs, min = 0, max = 10) + rbinom(n = n_obs, size = 10, prob = 0.3) + rnorm(n = n_obs, mean = 0, sd= 30)
+	mean <- mean(sample)
+	
+	sample_means <- c(sample_means, mean)
+}
+
+hist(sample_means)
+
+```

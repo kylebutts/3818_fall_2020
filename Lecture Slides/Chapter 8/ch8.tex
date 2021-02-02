@@ -1,0 +1,251 @@
+
+\documentclass{beamer}
+\usetheme{metropolis} % Use metropolis theme
+
+
+
+
+
+\title{ECON 3818: Introduction to Statistics with Computer Applications}
+%\subtitle
+\date{\today}
+\author{Kyle Butts}
+
+
+
+\definecolor{blue}{RGB}{0,114,178}
+
+\definecolor{red}{HTML}{EB0E09}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+\definecolor{maroon}{HTML}{AF3335}
+\definecolor{purple}{HTML}{7E90B8}
+
+
+\definecolor{mybackground}{HTML}{ECECEC}
+\setbeamercolor{background canvas}{bg= mybackground}
+
+\definecolor{buff-gold}{HTML}{CFB87C}
+\definecolor{buff-grey}{HTML}{565A5C}
+\definecolor{buff-lightgrey}{HTML}{A2A4A3}
+\definecolor{buff-black}{HTML}{000000}
+
+\setbeamercolor{alerted text}{fg=buff-gold!80!black}
+\setbeamercolor{frametitle}{bg=buff-black}
+\setbeamercolor{title}{fg=buff-grey}
+\setbeamercolor{button}{bg=buff-gold}
+
+% Allow to remove indent w/ \begin{itemize}[leftmargin= *]
+\usepackage{enumitem}
+\setlist[itemize]{label= \textbullet}
+
+% \usepackage[libertine]{newtxmath}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+
+
+
+
+
+
+\begin{document}
+
+% Title Page ---------------------------------------
+\maketitle
+
+
+% Chapter 8 ----------------------------------------
+\section{Chapter 8: Producing Data -- Sampling}
+\begin{frame}{Population vs. Sample}
+	
+	Recall our definitions of population and sample from earlier in the semester:
+	\vskip.25in
+	\begin{itemize}
+		\item \alert{population}: the entire group about which we want information
+		\item \alert{sample}: the part of the population for which we collect information
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	
+	We use information from the sample to draw conclusions about the population as a whole. In order to ensure accurate inferences of population must follow a sampling design
+	\vskip.25in
+	\begin{itemize}
+		\item \alert{sampling design}: describes exactly how to choose a sample from the population 
+		\item \alert{sample survey}: describes the population of interest, the sample to be surveyed, and the way in which they are surveyed (the sample design).
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Sample Survey Example}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{cpsbls}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Clicker Question}
+	
+	An online store contacts 1000 customers from its list of customers who have purchased in the last year. In all, 696 of the 1000 say that they are very satisfied with the store's website. The population in this setting is:
+	\vskip.25in
+	\begin{enumerate}[label=(\alph*)]
+		\item all customers who have purchased something in the last year
+		\item the 1000 who were contacted
+		\item the 696 customers who were very satisfied with the store's website
+	\end{enumerate}
+	
+\end{frame}
+
+\begin{frame}{Clicker Question}
+	
+	An opinion poll calls 2000 randomly chosen residential telephone numbers in Portland and asks to speak with an adult member of the household. The interviewer asks, "how many movies have you watched in a movie theatre in the past 12 months?". In all, 831 people respond. The sample in this study is:
+	\vskip.25in
+	\begin{enumerate}[label=(\alph*)]
+		\item all adults living in Portland
+		\item all 2000 residential phone numbers called
+		\item the 831 people who responded
+	\end{enumerate}
+	
+\end{frame}
+
+\begin{frame}{Importance of "good" sampling}
+	
+	In order to draw inferences about the population by using a sample, that sample must be representative. The choice of sample design may hinder representation. The following are examples of poor sample designs:
+	\begin{itemize}
+		\item A \alert{convenience sample} surveys members of the population that are easiest to reach
+		\item A \alert{voluntary response sample} consists of people who choose to participate by responding to a general appeal
+	\end{itemize}
+	We say that a sample is \alert{biased} if it systematically favors certain outcomes
+	
+\end{frame}
+
+\begin{frame}{Sample Bias}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{sample}
+	\end{center}
+\end{frame} 
+
+\begin{frame}{Simple Random Samples}
+	The best way to avoid sample bias is to randomly sample.
+	\begin{itemize}
+		\item \alert{Random sampling}: the use of chance to select a sample
+		\item \alert{Simple random sample}: consists of $n$ individuals from the population chosen in such a way that every set of $n$ individuals has an equal chance to be the sample actually selected 
+	\end{itemize}
+	Examples:
+	\begin{itemize}
+		\item Flip a coin to choose someone in the sample
+		\item Assign each individual a number and choose sample by randomly generating set of numbers 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Stratified SRS}
+	We might group individuals into a \alert{strata} if we are confident they are similar. Selecting SRSs within a strata leads to better representation. This process is called \alert{stratified SRS}.
+	
+	Example: A SRS from the set of all households in the U.S. may inadvertently select more single-parent households than two-parent, leading to a biased sample. 
+	 Solution: create two strata -- one for single-parent households and one for two-parent households -- and then choose SRS within strata.
+\end{frame}
+
+\begin{frame}{Stratified SRS}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{stratified}
+		
+	\end{center}
+\end{frame}
+
+\begin{frame}{Clicker Question}
+	
+	If I randomly choose a sample of 40 from a classroom of 300, what is the probability of each student to be selected into the sample?
+	\vskip.25in
+	\begin{enumerate}[label=(\alph*)]
+		\item 0.003
+		\item 0.13
+		\item .025
+	\end{enumerate}
+	
+\end{frame}
+
+\begin{frame}{Inference}
+	Recall, we use samples to give us information about a larger population
+	\begin{itemize}
+		\item This process of drawing conclusions about a population on the basis of sample data is called \alert{inference}
+		\item Results from sample inference come with \alert{margins of error}. -- bounds on our inferred estimates of population properties. 
+		      \begin{itemize}
+		      	\item These margins of error decrease as the sample size approaches the population size.
+		      \end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Inference}
+	Biased sample design will lead to biased inference. With biased inference, we cannot make any trustworthy claims about population.
+	\begin{itemize}
+		\item The sample you use will determine your results
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Threats to Valid Inference}
+	A few common sources of bias are:
+	\begin{itemize}
+		\item \alert{Undercoverage}: when some groups in the population are left out of the process of choosing the sample
+		\item \alert{Oversampling}: when some groups are sampled more often than others in a way that is not representative of the population
+		\item \alert{Nonresponse}: when an individual chosen for the sample can't be contacted or refuses to participate
+		\item \alert{Response Bias}: a systematic pattern of incorrect responses in a sample survey
+		\item \alert{Wording Effect}: a systematic pattern of responses due to poor (or manipulated) wording of survey questions
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Clicker Question}
+	
+	Individuals are randomly selected to receive a text message link to an online survey. The survey asks, "Rate your dissatisfaction with Boulder's Soda Tax." This survey suffers from:
+	\vskip.25in
+	\begin{enumerate}[label=(\alph*)]
+		\item Oversampling
+		\item Nonresponse
+		\item Wording effect
+		\item Both B and C
+	\end{enumerate}
+	
+\end{frame}
+
+
+\begin{frame}{Clicker Question}
+	
+	At a large university, a simple random sample of five female professors is selected, and a simple random sample of 10 male professors is selected. The two samples are combined to give an overall sample of 15 professors. The overall sample is:
+	\begin{enumerate}[label=(\alph*)]
+		\item a simple random sample
+		\item biased due to imbalance
+		\item a stratified sample
+		\item All of the answer options are correct
+	\end{enumerate}
+	
+\end{frame}
+
+\begin{frame}{Clicker Question -- Midterm Example}
+	
+	A sociologist studying freshmen at a major university carried out a survey, asking (among other
+	questions) how often students went out per week, how many hours they studied per day, and
+	how many hours they slept at night. The sociologist, who would like a simple random sample
+	but finds it too time consuming to obtain such a sample, decides to use all students enrolled in
+	his own class. This type of sample:
+	\begin{enumerate}[label=(\alph*)]
+		\item is a convenience sample.
+		\item likely results in undercoverage of certain types of freshmen.
+		\item could lead to biased conclusions.
+		\item All of the answer options are correct
+	\end{enumerate}
+\end{frame}
+
+
+
+
+\begin{frame}{Sampling Bias Example}
+	\begin{columns}
+		\column{0.5\textwidth}
+		\includegraphics[width=\textwidth]{pic1}
+		\column{0.5\textwidth}
+		\includegraphics[width=\textwidth]{pic2}
+	\end{columns}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,82 @@
+---
+title: "3818 R Homework 1"
+author: "*** STUDENT NAME HERE ***"
+date: "8/20/2020"
+output: html_document
+---
+
+R Markdown: https://ntaback.github.io/UofT_STA130/Rmarkdownforclassreports.html
+
+## Question 1 
+Go through introduction_to_R.pdf. Install R and R studio. In the context of the
+introduction_to_R.pdf, what is the value of nonsense?
+
+*Answer:* 
+
+
+## Question 2 
+Load the dataset on household and neighbor characteristics found at https://mattbutner.github.io/data/housing_df.csv as done in the introduction_to_R.pdf document. Look in the upper right panel of R studio, how many variables and how many observations are in this data set?
+
+```{r Question 2}
+# Code for Question 2 Here
+
+```
+
+*Answer:* 
+For question 2, the standard deviation is 10.54
+
+## Question 3 
+The variable descriptions for this dataset can be found on canvas. Look at the
+housing_df_info.docx. Which of the variables are quantitative, which of the variables are categorical?
+
+*Answer:* 
+
+
+## Question 4 
+Use the function mean() to find the average median value of owner-occupied homes in
+$1000’s. Report the R code and number to two digits.
+
+```{r Question 4}
+# Code for Question 4 Here
+
+
+```
+
+*Answer:* 
+
+
+## Question 5 
+Use the function sd() to calculate the sample standard deviation median value of owner-
+occupied homes in $1000’s. Report the R code and number to two digits.
+
+```{r Question 5}
+# Code for Question 5 Here
+
+
+```
+
+*Answer:* The standard deviation of the median housing value is $9,197.10.
+
+## Question 6 
+Using the functions sqrt(), sum(), ^2, length(), and mean(), but not var() or sd(), calculate
+the sample standard deviation median value of owner-occupied homes in $1000’s. Report the R code and number to two digits.
+
+```{r Question 6}
+# Code for Question 6 Here
+
+
+```
+
+*Answer:*
+
+## Question 7
+Use the hist() function, create a histogram of NOX pollution. With this distribution is the
+mean or median a better measure of central tendency?
+
+```{r Question 7}
+# Code for Question 7 Here
+
+
+```
+
+*Answer:* 

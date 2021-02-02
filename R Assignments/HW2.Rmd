@@ -1,0 +1,88 @@
+---
+title: "3818 R Homework 2"
+author: "*** Student Name ***"
+date: "8/20/2020"
+output: html_document
+---
+
+R has several functions built-in that can be used to calculate probabilities associated with known
+probability distributions. When in doubt, don’t forget that you can always type help(“function”)
+into the console for documentation! For example, help(dbinom) might help for problem 1.
+
+## Question 1 
+You flip an unbalanced coin 100 times. The probability that the coin lands on heads is
+0.3. Using the `dbinom()` function in R, calculate the probability that the coin lands on the heads side exactly 30 times out of the possible 100.
+
+```{r Question 1}
+# Code for Question 1 goes here
+
+
+```
+
+*Answer:*
+
+
+## Question 2 
+You are teaching a class of eighty students. From experience, you know the probability that any one student passes the course is 0.95. Further, you assume that one student passing is independent from any other student passing. Using the `pbinom()` function in R, calculate the probability that the number of students (out of eighty) that fail the course is greater than or equal to five students.
+
+```{r Question 2}
+# Code for Question 2 goes here
+
+
+```
+
+*Answer:*
+
+
+## Question 3 
+Use the `rbinom()` function to create a vector of 10 random observations from the binomial distribution with n=100 and probability of success is equal to 0.4. In this situation, we’d like there to be 10 random draws from a distribution that has 100 trials, meaning you flip a coin 100 times, 10 different times.
+- Calculate the mean and standard deviation statistics for this vector of random draws using the `mean()` and `sd()` commands.
+- How do these numbers compare the mean and standard deviation of the binomial distribution when $n = 100$ and $p = 0.4$? If they are different, why? Hint: if $X \sim B(n,p)$, then $\mu = np$
+and $\sigma = \sqrt{np(1-p)}$.
+- Make a histogram of this vector using the `hist()` command. 
+
+```{r Question 3}
+# Code for Question 3 goes here
+
+
+```
+
+*Answer:*
+
+
+## Question 4 
+Repeat question 3 but with 1,000 random draws. Comment on how the new sample mean
+compares to the population mean and the old sample mean. How does the histogram
+differ?
+
+```{r Question 4}
+# Code for Question 4 goes here
+
+
+```
+
+*Answer:*
+
+
+## Question 5 
+Use the `pnorm()` function in R to verify the empirical rule. Note that `pnorm(x)` calculates left tail probability of the standard normal distribution for $x$.
+- 68% of observations are within 1 standard deviation of the mean
+- 95% of observations are within 2 standard deviations of the mean
+- 99.7% of observations are within 3 standard deviations of the mean
+
+```{r Question 5}
+# Code for Question 5 goes here
+
+
+```
+
+
+## Question 6 
+You and a friend take a statistics exam. The teacher tells you the exam grades were normally distributed with a mean of 72 and a standard deviation of 8. Your friend seems happy about their exam, but they won’t tell you their exact score. Instead they tell you that their grade is in the top 1% of all grades. Using the `qnorm()` function, calculate what their grade must be.
+
+```{r Question 6}
+# Code for Question 6 goes here
+
+
+```
+

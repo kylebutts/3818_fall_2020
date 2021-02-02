@@ -1,0 +1,123 @@
+---
+title: "R Day 2"
+output:
+  html_document:
+    theme: spacelab
+    highlight: tango
+---
+
+# Binomial Distribution
+
+$$X \sim B(n = 5, p= 0.6)$$
+Calculate $P(X=1)$, $P(X = 3)$, and $P(X >= 4)$ by hand. The function `choose(n,k)` will help.
+
+```{r Probability by Hand}
+p <- 0.6
+
+# Calculate P(X = 1)
+choose(5,1) * p^1 * (1-p)^4
+
+# Calculate P(X = 3)
+choose(5,3) * p^3 * (1-p)^2
+
+# Calculate P(X >= 4)
+(choose(5,4) * p^4 * (1-p)^1) + (choose(5,5) * p^5 * (1-p)^0)
+
+```
+
+R has a suite of distribution functions that will make this way easier. For each distribution you will have a corresponding set of for functions: `rxxxx`, `pxxxx`, `qxxxx`, and `dxxxx`, but we will only use the first 3 in this class
+
+```{r Help}
+help("distributions")
+help("Binomial")
+help("Normal")
+```
+
+# Calculating Probability of Binomial Distribution
+
+Calculate $P(X=1)$, $P(X = 3)$, and $P(X= 4)$ using the `pbinom` function
+
+```{r}
+# P(X = 1)
+dbinom(x = 1, size = 5, prob = 0.6)
+# P(X <= 1)
+pbinom(q = 1, size = 5, prob = 0.6)
+# P(X = 0) + P(X = 1)
+dbinom(x = 0, size = 5, prob = 0.6) + dbinom(x= 1, size = 5, prob = 0.6)
+
+# P(X = 3)
+dbinom(x = 3, size = 5, prob = 0.6)
+
+# P(X >= 4)
+# P(X = 4) + P(X = 5)
+dbinom(x = 4, size = 5, prob = 0.6) + dbinom(x= 5, size = 5, prob = 0.6)
+
+# 1 - P(X <= 3)
+1 - pbinom(q = 3, size = 5, prob = 0.6)
+
+```
+
+
+
+# Generating Random Variables from Binomial Distribution
+
+Read through the Arguments of Binomial distribution, for the above example, lets try calculating 1 observation of $X$.
+
+```{r Drawing from Binomial Distribution}
+rbinom(n = 100, size = 5, prob = 0.6)
+```
+
+
+Let's plot a histogram of the sample distribution of 10 observations with the argument `probability = TRUE` and `breaks = -0.5:0.5`. Do the sample probabilities match the calculated probabilities above?
+
+```{r}
+sample <- rbinom(n = 10, size = 5, prob = 0.6)
+print(sample)
+# Plot Histogram
+hist(sample, breaks= -0.5:5.5, probability = TRUE)
+```
+
+Repeat the exercise below and increase the number of obsevations. What happens to the sample probabilities as n gets larger?
+
+```{r}
+large_sample <- rbinom(n = 10000, size = 5, prob = 0.6)
+hist(large_sample, breaks= -0.5:5.5, probability = TRUE)
+```
+
+** PRACTICE **
+
+Try the histogram for different values of size and prob. What happens to the distribution?
+
+$$ \mu = np $$
+
+$$ \sigma = \sqrt(np(1-p))$$
+
+```{r Different values of size}
+large_sample <- rbinom(n = 10000, size = 1000, prob = 0.6)
+hist(large_sample, breaks= -0.5:1000.5, probability = TRUE)
+```
+
+
+```{r Different values of Prob}
+large_sample <- rbinom(n = 10000, size = 5, prob = 0.3)
+hist(large_sample, breaks= -0.5:5.5, probability = TRUE)
+```
+
+
+
+
+
+# Normal Distribution
+
+Create a histogram of normal distributions using `mean = 0` and `sd = 2`. Compare the Binomial Distribution and the Normal Distribution
+
+```{r}
+# help("Normal")
+norm_sample <- rnorm(n = 10000, mean = 1000, sd = 40) 
+
+hist(norm_sample, probability = TRUE)
+```
+
+
+
+

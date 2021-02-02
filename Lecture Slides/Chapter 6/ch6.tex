@@ -1,0 +1,353 @@
+\documentclass{beamer}
+\usetheme{metropolis} % Use metropolis theme
+
+\title{ECON 3818: Introduction to Statistics with Computer Applications}
+\date{\today}
+\author{Kyle Butts}
+
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{HTML}{EB0E09}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+\definecolor{maroon}{HTML}{AF3335}
+\definecolor{purple}{HTML}{7E90B8}
+\definecolor{buff-gold}{HTML}{CFB87C}
+\definecolor{buff-grey}{HTML}{565A5C}
+\definecolor{buff-lightgrey}{HTML}{A2A4A3}
+\definecolor{buff-black}{HTML}{000000}
+
+\definecolor{mybackground}{HTML}{ECECEC}
+\setbeamercolor{background canvas}{bg= mybackground}
+
+\setbeamercolor{alerted text}{fg=buff-gold!80!black}
+\setbeamercolor{frametitle}{bg=buff-black}
+\setbeamercolor{title}{fg=buff-grey}
+\setbeamercolor{button}{bg=buff-gold}
+
+% Allow to remove indent w/ \begin{itemize}[leftmargin= *]
+\usepackage{enumitem}
+\setlist[itemize]{label= \textbullet}
+
+% \usepackage[libertine]{newtxmath}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\usepackage{diagbox}
+
+
+\begin{document}
+
+% Title Page ---------------------------------------
+\maketitle
+
+
+
+
+% Chapter 6 ----------------------------------------
+\section{Chapter 6: Two-Way Tables}
+\begin{frame}{Introduction}
+	This chapter discusses the relationship between two categorical variables
+	\begin{itemize}
+		\item To analyze categorical data, we use the \textit{counts} or \textit{percentages} of individuals that fall into various categories
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Two-Way Table}
+	Typically, published data is grouped in order to save space. This chapter will talk about \alert{Two-Way Tables}
+	
+	
+	\begin{center}
+		\footnotesize{
+			\begin{tabular}{|c|c|c|c|c|}
+				\hline
+				\diagbox{Sex}{Degree} & Associate & Bachelor's & Master's & Doctorate \\
+				\hline
+				Women                           & 673       & 1050       & 481      & 95        \\
+				\hline
+				Men                             & 401       & 780        & 342      & 89        \\
+				\hline
+			\end{tabular}}
+	\end{center}
+	This two-way table describes two categorical variables. One is the sex of an individual, this is the \alert{row variable} and the other is the degree attained, which is the \alert{column variable}
+\end{frame}
+
+\begin{frame}{Joint Distribution}
+	The joint distribution is found by dividing each cell by the total count.
+	$$P(x,y)=\frac{\text{number of times x and y occurs}}{\text{total number of occurrences}}$$
+	Since we have 3911 people in total, we get the following joint probabilities:
+	\begin{center}
+		\footnotesize{
+			\begin{tabular}{|c|c|c|c|c|}
+				\hline
+				\diagbox{Sex}{Degree} & Associate      & Bachelor's    & Master's      & Doctorate      \\
+				\hline
+				Women                           & 673            & 1050          & 481           & 95             \\
+				Joint \%                        & \textbf{0.17}  & \textbf{0.27} & \textbf{0.12} & \textbf{0.024} \\ 
+				\hline
+				Men                             & 401            & 780           & 342           & 89             \\
+				Joint \%                        & \textbf{0.103} & \textbf{0.2}  & \textbf{0.09} & \textbf{0.023} \\
+				\hline
+			\end{tabular}}
+	\end{center}
+	This means the probability of being a woman \textbf{and} having a Master's degree is 12\%
+\end{frame}
+
+\begin{frame}{Marginal Distribution}
+	A \alert{marginal distribution} is the probability distribution associated with only one of the random variables
+	
+	In order to calculate, we need to look at the distribution of each variable \textit{separately}. We do this by looking at the "Total" column and "Total" row.
+	 
+	We will have two different marginal distributions, the "row" marginal and the "column" marginal
+\end{frame}
+
+\begin{frame}{Row Marginal}
+	In this scenario, the row marginal is the distribution of sex alone:
+	\begin{center}
+		\scriptsize{
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				\diagbox{Sex}{Degree} & Associate's    & Bachelor's    & Master's      & Doctorate      & Row Marginal   \\
+				\hline
+				Women                           & 673            & 1050          & 481           & 95             &                \\
+				Joint \%                        & \textbf{0.17}  & \textbf{0.27} & \textbf{0.12} & \textbf{0.024} & \textbf{0.584} \\ 
+				\hline
+				Men                             & 401            & 780           & 342           & 89             &                \\
+				Joint \%                        & \textbf{0.103} & \textbf{0.2}  & \textbf{0.09} & \textbf{0.023} & \textbf{0.416} \\
+				\hline
+			\end{tabular}}
+	\end{center}
+	58.4\% of individuals in this sample of degree holders are women.
+\end{frame}
+
+\begin{frame}{Column Marginal}
+	In this scenario, the column marginal is the distribution of degrees alone:
+	\begin{center}
+		\scriptsize{
+			\begin{tabular}{|c|c|c|c|c|}
+				\hline
+				\diagbox{Sex}{Degree} & Associate's    & Bachelor's    & Master's      & Doctorate       \\
+				\hline
+				Women                           & 673            & 1050          & 481           & 95              \\
+				Joint \%                        & \textbf{0.17}  & \textbf{0.27} & \textbf{0.12} & \textbf{0.024}  \\ 
+				\hline
+				Men                             & 401            & 780           & 342           & 89              \\
+				Joint \%                        & \textbf{0.103} & \textbf{0.2}  & \textbf{0.09} & \textbf{0.023}  \\
+				\hline
+				Column marginal                 & \textbf{0.273} & \textbf{0.47} & \textbf{0.21} & \textbf{ 0.047} \\
+				\hline
+			\end{tabular}}
+	\end{center}
+	The probability of an individual having a Bachelor's degree is 47\%.
+\end{frame}
+
+\begin{frame}{Conditional Distribution}
+	
+	We can use these tables to back out conditional distributions. 
+	
+	Remember:
+	$$P(A \vert B)=\frac{P(A \cap B)}{P(B)}$$
+	This is the same expression as:
+	$$P(x\vert y)=\frac{P(x,y)}{P(y)}$$
+	
+\end{frame}
+
+\begin{frame}{Conditional Distribution}
+	For example, we can calculate the probability of holding each degree, given the individual is a woman: 
+	
+	P(Associate's $\vert$ Woman) = \\
+	P(Associate's and Woman)/P(Woman)=$0.17/0.584=29.1\%$
+	
+	P(Bachelor's $\vert$ Woman) = \\
+	P(Bachelor's and Woman)/P(Woman)=$0.27/0.584=46.2\%$
+	
+	P(Master's $\vert$ Woman) = \\
+	P(Master's and Woman)/P(Woman)=$0.12/0.584=20.5\%$
+	
+	P(Doctorate $\vert$ Woman) = \\
+	P(Doctorate and Woman)/P(Woman)=$0.024/0.584=4.1\%$
+\end{frame}
+%\begin{center}
+%\begin{tabular}{|M{2cm}|M{7cm}|}
+%\hline 
+%Associate's &  $\frac{673}{2299} \rightarrow P(Associate's\vert woman)=29.3\%$ \\ [5pt]
+%\hline
+%Bachelor's &   $\frac{1050}{2299} \rightarrow P(Bachelor's\vert woman)=45.7\%$ \\ [5pt]
+%\hline
+%Master's &   $\frac{481}{2299} \rightarrow P(Master's\vert woman)=20.9\%$ \\ [5pt]
+%\hline
+%Doctorate &   $\frac{95}{2299} \rightarrow P(Doctorate\vert woman)=4.1\%$ \\ [5pt]
+%\hline
+%\end{tabular}
+%\end{center}
+%
+%\end{frame}
+
+\begin{frame}{Conditional Distribution}
+	We could also calculate the probability an individual is a particular sex, based of holding an Associate's degree
+	
+	P(Male $\vert$ Associate's) = \\
+	P(Male and Associate's)/P(Associate's)=$.103/0.273=37.7\%$
+	
+	P(Female $\vert$ Associate's) = \\
+	P(Female and Associate's)/P(Associate's)=$.17/.273=62.3\%$
+\end{frame}
+
+
+\begin{frame}{Joint Probabilities vs. Conditional Probabilities}
+	\begin{itemize}
+		\item Joint probabilities take into account the probability that each event happens on its own
+		\item Conditional probabilities assume that one event has already happened
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Joint Probability vs. Conditional Probability}{Example}
+	\begin{itemize}
+		\item P(work in tech job $\cap$ live in Boulder) vs. \\ P(work in tech job $\vert$ live in Boulder)
+		      \begin{itemize}
+		      	\item P(work in tech) = work in tech/entire US population = relatively small, let's say 7\%
+		      	\item P(live in Boulder) = Boulder population/entire US population = also small, $<$1\%
+		      \end{itemize}
+		\item This means the probability of BOTH happening is small, because both events are unlikely compared to the state space of the entire US population
+		\item But the P(work in tech $\vert$ live in Boulder) will be higher because now the state space is Boulder population, which has a greater concentration of high-tech employees
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Marginal and Conditional Distributions}
+	Here are some formal definitions:
+	The \alert{\small{marginal distribution}} of one of the categorical variables in a two-way table of counts is the \alert{\small{distribution of that variable among all individuals described by the table}}
+	\begin{itemize}
+		\item distribution of sex or degrees alone
+	\end{itemize}
+	
+	A \alert{\small{conditional distribution}} of a variable is the \alert{\small{distribution of values of that variable among only individuals who have a given value of the other variable}}. There is a separate conditional distribution for each value of the other variable. 
+	\begin{itemize}
+		\item there are two sets of conditional distributions for any two-way table, probability of having a degree based on sex, probability of being a particular sex based on degree held
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Clicker Question} 
+	\begin{center}
+		\begin{tabular}{|c|l|c|c|c|}
+			\hline 
+			& \multicolumn{4}{c|}{{\color{blue}Class of Person on Titanic}}   \\ 
+			\hline 
+			{\color{blue}Survival} & First & Second & Third & Crew \\ 
+			\hline 
+			Alive                  & 203   & 118    & 178   & 212  \\ 
+			\hline 
+			Dead                   & 122   & 167    & 528   & 673  \\ 
+			\hline 
+			%		{\color{blue}Total} & \textbf{325} & \textbf{285} & \textbf{706} &\textbf{ 885} & \textbf{2201} \\ 
+			%		\hline 
+		\end{tabular} 
+	\end{center}
+	
+	Given this joint distribution, what is the probability of survival, given you are a first class passenger?
+	\begin{enumerate}[label=(\alph*)]
+		\item 9\%
+		\item 62\%
+		      \item1.3\%
+		\item 30\%
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Simpson's Paradox}
+	
+	\url{https://ed.ted.com/lessons/how-statistics-can-be-misleading-mark-liddell}
+	
+\end{frame}
+
+\begin{frame}{Simpson's Paradox}
+	Consider the survival rates for the following groups of victims who were taken to the hospital, either by helicopter, or by road:
+	
+	{\footnotesize
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{Counts} & \textbf{Helicopter} & \textbf{Road} \\
+		\hline \hline 
+		Victim Died & 64 & 260 \\ \hline 
+		Victim Survived & 136 & 840 \\ \hline 
+		Total & 200 & 1100 \\ \hline 
+	\end{tabular} 
+	}
+	{\footnotesize
+	\begin{tabular}{|l|c|c|}
+		\hline 
+		\textbf{Percents} & \textbf{Died} & \textbf{Survived} \\ 
+		\hline \hline
+		Helicopter & 32\% & 68\% \\ \hline
+		Road & 24\% & 76\% \\ \hline
+	\end{tabular}
+	}
+	
+	\vspace{5mm}
+	The probability of died conditional on helicopter, is higher than the probability of died conditional road. Does this mean that this (more costly) mode of transportation isn't helping?
+\end{frame}
+
+\begin{frame}{Simpson's Paradox}
+	The idea is there a confounding variable, the severity of the accident, behind the Statistics
+
+	\begin{center}
+		\textbf{Serious Accidents}
+	\end{center}
+	{\footnotesize
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{Counts} & \textbf{Helicopter} & \textbf{Road} \\
+		\hline \hline 
+		Victim Died & 48 & 60 \\ \hline 
+		Victim Survived & 52 & 40 \\ \hline 
+		Total & 100 & 100 \\ \hline 
+	\end{tabular} 
+	}
+	{\footnotesize
+	\begin{tabular}{|l|c|c|}
+		\hline 
+		\textbf{Percents} & \textbf{Died} & \textbf{Survived} \\ 
+		\hline \hline
+		Helicopter & 48\% & 52\% \\ \hline
+		Road & 60\% & 40\% \\ \hline
+	\end{tabular}
+	}
+
+	\begin{center}
+		\textbf{Less Serious Accidents}
+	\end{center}
+	{\footnotesize
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{Counts} & \textbf{Helicopter} & \textbf{Road} \\
+		\hline \hline 
+		Victim Died & 16 & 200 \\ \hline 
+		Victim Survived & 84 & 800 \\ \hline 
+		Total & 200 & 1100 \\ \hline 
+	\end{tabular} 
+	}
+	{\footnotesize
+	\begin{tabular}{|l|c|c|}
+		\hline 
+		\textbf{Percents} & \textbf{Died} & \textbf{Survived} \\ 
+		\hline \hline
+		Helicopter & 16\% & 84\% \\ \hline
+		Road & 20\% & 80\% \\ \hline
+	\end{tabular}
+	}
+
+\end{frame}
+
+\begin{frame}{Clicker Question}
+	From 2010-2013 the US median wage increased 1\%, however over the same time period the median wage has decreased within each education subgroup (high school drop outs, high school graduates, some college, bachelor's or more).
+	
+	Which of the following explanations is consistent with Simpson's paradox?
+	\begin{enumerate}[label=(\alph*)]
+		\item The BLS didn't control for inflation
+		\item There are more people with bachelor's degrees (high income people)
+		\item The wage of the highest income earner went up even more
+		\item There are less unemployed people now
+	\end{enumerate}
+\end{frame}
+
+
+
+\end{document}
